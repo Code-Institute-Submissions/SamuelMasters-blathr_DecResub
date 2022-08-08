@@ -6,7 +6,6 @@ from django.views import View
 
 
 class Homepage(View):
-    template_name = 'base.html'
 
     def get(self, request):
-        return render(request, "base.html")
+        return render(request, 'base.html')
