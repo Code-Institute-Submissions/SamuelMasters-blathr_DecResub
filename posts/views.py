@@ -1,4 +1,12 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
+from django.views import View
 
-def test_func(request):
-    return HttpResponse("Testing...")
+# def home(request):
+#     return render(request, 'base.html')
+
+
+class Homepage(View):
+    template_name = 'base.html'
+
+    def get(self, request):
+        return render(request, "base.html")
