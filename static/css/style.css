@@ -23,3 +23,7 @@ nav {
 .navbar-brand a {
     text-decoration: none;
 }
+
+footer {
+    border: 1px solid blue;
+}
