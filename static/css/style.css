@@ -27,3 +27,7 @@ nav {
 footer {
     border: 1px solid blue;
 }
+
+#post-feed {
+    border: 1px solid yellow;
+}
