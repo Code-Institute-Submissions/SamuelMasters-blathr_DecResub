@@ -19,6 +19,6 @@ from posts.views import Homepage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', Homepage.as_view(), name='base.html'),
+    path('', Homepage.as_view(), name='home'),
     path('accounts/', include('allauth.urls')),
 ]

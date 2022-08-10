@@ -1,3 +1,25 @@
 body {
     background-color: #A8BCD1;
+    border: 1px solid green;
+}
+
+nav {
+    border: 1px solid red;
+}
+
+#navbar-logo {
+    font-size: xx-large;
+}
+
+.navbar ul {
+    flex-direction: row;
+}
+
+.navbar ul li {
+    padding-right: 0.7rem;
+    padding-left: 0.7rem;
+}
+
+.navbar-brand a {
+    text-decoration: none;
 }
