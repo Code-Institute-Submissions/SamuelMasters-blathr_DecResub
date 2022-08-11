@@ -9,7 +9,12 @@ class Category(models.Model):
     category_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20, unique=True, null=False)
 
+    def __str__(self):
+        return self.name
+
+
 STATUS = ((0, "Draft"), (1, "Published"))
+
 
 class Post(models.Model):
     """
@@ -21,10 +26,10 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
-    vote_count = models.ManyToManyField(User, related_name='post_like',
-                                        blank=True) 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     status = models.IntegerField(choices=STATUS, default=0)
+    vote_count = models.ManyToManyField(User, related_name='vote_count',
+                                        blank=True)
 
 
 class Comment(models.Model):

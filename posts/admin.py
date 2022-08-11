@@ -13,7 +13,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class PostAdmin(SummernoteModelAdmin):
 
     summernote_fields = ('content')
-    list_display = ('title', 'author', 'created_date', 'category')
+    list_display = ('title', 'author', 'created_date', 'category', 'status')
     list_filter = ['author', 'created_date', 'category']
     search_fields = ('author', 'content')
 
