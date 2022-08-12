@@ -3,9 +3,17 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-10" id="post-feed">
-        <p>TEST CONTENT</p>
+    {% for post in post_list %}
+    <div class="col-12 col-md-9">
+        <div class="post-card">
+            <div class="post-card-body">
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.author }}</p>
+                <p>{{ post.content | safe }}</p>
+            </div>
+        </div>
     </div>
+    {% endfor %}
 </div>
 
 {% endblock %}

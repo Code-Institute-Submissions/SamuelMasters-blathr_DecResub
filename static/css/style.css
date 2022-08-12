@@ -31,3 +31,11 @@ footer {
 #post-feed {
     border: 1px solid yellow; /* development only */
 }
+
+.post-card {
+    border: 1px solid purple; /* development only */
+}
+
+.post-card-body {
+    border: 1px solid cyan; /* development only */
+}
