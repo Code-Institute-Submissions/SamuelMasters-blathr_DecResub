@@ -1,5 +1,7 @@
 body {
     background-color: #A8BCD1;
+    margin: 0;
+    padding: 0;
     border: 1px solid green; /* development only */
 }
 
@@ -33,9 +35,26 @@ footer {
 }
 
 .post-card {
+    margin-bottom: 3%;
     border: 1px solid purple; /* development only */
 }
 
 .post-card-body {
     border: 1px solid cyan; /* development only */
+}
+
+#body-row {
+    margin: 3% 0 0 0;
+    padding: 0;
+    border: 1px solid gold; /* development only */
+}
+
+#category-col {
+    justify-content: left;
+    border: 1px solid red; /* development only */
+}
+
+.container-fluid {
+    padding: 0;
+    justify-content: right;
 }
