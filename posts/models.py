@@ -31,6 +31,9 @@ class Post(models.Model):
     vote_count = models.ManyToManyField(User, related_name='vote_count',
                                         blank=True)
 
+    def __str__(self):
+        return self.title
+
 
 class Comment(models.Model):
     """
