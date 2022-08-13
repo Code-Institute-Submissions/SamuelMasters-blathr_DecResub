@@ -2,8 +2,7 @@
 
 {% block content %}
 
-
-<div class="row container-fluid" id="body-row">
+<div class="row container-fluid" id="body-row" >
     <div class="col-md-3" id="category-col">
         <p>category list here</p>
         {% for category in category_list %}
@@ -11,13 +10,15 @@
         {% endfor %}
     </div>
 </div>
-<div class="row">
+
+
+<div class="row container-fluid">
     {% for post in post_list %}
     <div class="col-12 col-md-9">
         <div class="post-card">
             <div class="post-card-body">
                 <h4>{{ post.title }}</h4>
-                <p>{{ post.author }}</p>
+                <p><em>{{ post.author }}</em></p>
                 <p>{{ post.content | safe }}</p>
             </div>
         </div>
