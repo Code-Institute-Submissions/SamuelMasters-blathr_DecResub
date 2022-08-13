@@ -2,6 +2,15 @@
 
 {% block content %}
 
+
+<div class="row container-fluid" id="body-row">
+    <div class="col-md-3" id="category-col">
+        <p>category list here</p>
+        {% for category in category_list %}
+        <p>{{ category.name }}</p>
+        {% endfor %}
+    </div>
+</div>
 <div class="row">
     {% for post in post_list %}
     <div class="col-12 col-md-9">
