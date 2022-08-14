@@ -4,9 +4,9 @@
 
 <div class="row container-fluid" id="body-row" >
     <div class="col-md-3" id="category-col">
-        <p>category list here</p>
+        <p><strong>Categories:</strong></p><br>
         {% for category in category_list %}
-        <p>{{ category.name }}</p>
+        <p><a href="#"><strong>{{ category.name }}</strong></a></p>
         {% endfor %}
     </div>
 </div>
