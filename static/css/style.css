@@ -59,3 +59,7 @@ footer {
     padding: 0;
     justify-content: right;
 }
+
+#create_post_row {
+    justify-content: center;
+}
