@@ -1,8 +1,6 @@
-from django.shortcuts import render
-from django.views import View, generic
-from django.template import loader
+from django.shortcuts import render, redirect
+from django.views import View
 from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect
 from .models import Post, Category
 from .forms import PostForm
 
@@ -13,30 +11,21 @@ def home(request):
     return render(request, 'index.html', {'post_list': post_list, 'category_list': category_list})
 
 
-# def add(request):
-#     template = loader.get_template('add.html')
-#     return HttpResponse(template.render({}, request))
-
-
-# def add_post(request):
-#     post_title = request.POST['post-title']
-#     post_content = request.POST['post-content']
-#     post_category = request.POST['post-category']
-#     post_author = request.user
-#     print(post_author)  # remove before final deploy
-#     new_post = Post(title=post_title, author=post_author, content=post_content, category='Finance')
-#     new_post.save()
-#     return HttpResponseRedirect(reverse('index'))
-
-
 def add_post(request):
-    categories = Category.objects.all()
-
+    if request.POST:
+        new_post = PostForm(request.POST)
+        print(request.POST)  # debug statement, remove before final deploy
+        if new_post.is_valid():
+            new_post.save()
+        redirect(home)
+    current_user = request.user
+    print(current_user.username)  # debug
     return render(
         request,
         'add.html',
         {
-            "post_form": PostForm()
+            "post_form": PostForm(),
+            "current_user": current_user,
         },
     )
 

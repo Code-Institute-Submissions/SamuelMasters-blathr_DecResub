@@ -20,9 +20,7 @@ from posts.views import home, add_post
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
-    # path('', Homepage.as_view(), name='home'),
     path('', home, name='home'),
     path('accounts/', include('allauth.urls')),
-    # path('add/', add, name='add'),
     path('add/add_post/', add_post, name='add_post'),
 ]

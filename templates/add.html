@@ -7,28 +7,12 @@
     <div class="col-9">
         {% if user.is_authenticated %}
 
-        <!-- <h1>Add Post</h1> -->
-
-        <!-- <form action="add_post/" method="post">
-                {% csrf_token %}
-                Post Title:<br>
-                <input name="post-title">
-                <br><br>
-                Post Category:<br>
-                <input name="post-category">
-                <br><br>
-                Post Content:<br>
-                <input name="post-content">
-                <br><br>
-                <input type="submit" value="Submit">
-            </form> -->
-
         <h3>Create a Post</h3>
         <p>Posting as: {{ user.username }}</p>
-        <form method="post">
+        <form method="POST" action="{% url 'add_post' %}">
             {{ post_form | crispy }}
             {% csrf_token %}
-            <button type="submit" class="btn btn-signup btn-lg">Submit Post</button>
+            <button type="submit" class="btn">Submit Post</button>
         </form>
 
         {% else %}
