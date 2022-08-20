@@ -1,5 +1,6 @@
 from django.db import models
-from users.models import User
+from django.conf import settings
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -23,7 +24,7 @@ class Post(models.Model):
     post_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200, unique=True, blank=False,
                              null=False)
-    author = models.ForeignKey('auth.user', on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)  # adding default=2 here makes every post author 'admin'
     created_date = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
