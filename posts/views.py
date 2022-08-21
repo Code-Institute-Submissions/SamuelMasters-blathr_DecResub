@@ -37,14 +37,12 @@ def add_post(request, form=PostForm):
         },
     )
 
-def post_detail(request, id):
+def post_detail(request, post_id):
     """
     View for showing one post in it's entirety.
     """
     context = {}
 
-    context['data'] = Post.objects.get(post_id = id)
+    context['data'] = Post.objects.get(post_id=post_id)
 
     return render(request, 'post_detail.html', context)
-
-

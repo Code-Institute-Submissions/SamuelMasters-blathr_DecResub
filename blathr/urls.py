@@ -23,5 +23,5 @@ urlpatterns = [
     path('', home, name='home'),
     path('accounts/', include('allauth.urls')),
     path('add/add_post/', add_post, name='add_post'),
-    path('post_detail/<id>/', post_detail, name='post_detail'),
+    path('post_detail/<post_id>/', post_detail, name='post_detail'),
 ]
