@@ -25,14 +25,10 @@ def add_post(request, form=PostForm):
         print("DEBUG: request was recognised as POST.")
 
         if new_post.is_valid():
-            print("DEBUG: new_post was recognised as valid.")
-            new_post.author = request.user
-            print("DEBUG: new_post.author id set to " + str(request.user.id))  # debug
-            print("DEBUG: new_post.author username set to " + str(request.user.username))  # debug
-            print("DEBUG: new_post.author is currently: " + str(new_post.author))  # debug
-            print("DEBUG: printing new_post object...")
-            print(new_post)
-            new_post.save()
+            post_to_add = new_post.save(commit=False)
+            post_user = User.objects.get(username=request.user.username)
+            post_to_add.author = post_user  # add the current user as the author
+            post_to_add.save()
         redirect(home)
 
     current_user_id = request.user.id  # debug
