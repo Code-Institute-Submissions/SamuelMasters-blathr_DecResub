@@ -1,6 +1,4 @@
 from django.shortcuts import render, redirect
-from django.views import View
-from django.urls import reverse
 from .models import Post, Category
 from .forms import PostForm
 from django.contrib.auth.models import User
@@ -15,26 +13,15 @@ def home(request):
 
 def add_post(request, form=PostForm):
 
-    def get_form_kwargs(self):
-        kwargs = super(add_post, self).get_form_kwargs
-        kwargs['request'] = self.request
-        return kwargs
-
     if request.POST:
         new_post = form(request.POST)
-        print("DEBUG: request was recognised as POST.")
 
         if new_post.is_valid():
             post_to_add = new_post.save(commit=False)
             post_user = User.objects.get(username=request.user.username)
-            post_to_add.author = post_user  # add the current user as the author
+            post_to_add.author = post_user  # adds the current user as author
             post_to_add.save()
-        redirect(home)
-
-    current_user_id = request.user.id  # debug
-    current_user_username = request.user.username  # debug
-    print("DEBUG: current_user_id set to: " + str(current_user_id))  # debug
-    print("DEBUG: current_user_username set to: " + current_user_username)  # debug
+            return redirect(home)  # redirects to home page after submission
 
     return render(
         request,
@@ -43,11 +30,3 @@ def add_post(request, form=PostForm):
             "post_form": PostForm(),
         },
     )
-
-
-# class Homepage(generic.ListView):
-
-#     model = Post
-#     post_list = Post.objects.all()
-#     category_list = Category.objects.all()
-#     template_name = 'index.html'
