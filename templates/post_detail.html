@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row" id="post-detail-row">
+    <div class="col-10" id="post-detail-col">
+        <h4>{{ data.title }}</h4>
+        <p>Posted by: <em>{{ data.author }}</em></p>
+        <p>{{ data.content | safe }}</p>
+    </div>
+</div>
+
+{% endblock %}

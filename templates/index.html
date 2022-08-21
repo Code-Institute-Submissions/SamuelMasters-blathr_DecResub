@@ -16,8 +16,8 @@
             <div class="post-card">
                 <div class="post-card-body">
                     <h4>{{ post.title }}</h4>
-                    <p><em>{{ post.author }}</em></p>
-                    <p>{{ post.content | safe }}</p>
+                    <p>Posted by: <em>{{ post.author }}</em></p>
+                    <p>{{ post.content | safe | slice:":300"}}</p>
                     <p><strong><a href="#">View More...</a></strong></p>
                 </div>
             </div>

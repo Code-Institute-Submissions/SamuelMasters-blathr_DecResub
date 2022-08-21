@@ -63,3 +63,12 @@ footer {
 #create_post_row {
     justify-content: center;
 }
+
+#post-detail-row {
+    justify-content: center;
+    margin-top: 3%;
+}
+
+#post-detail-col {
+    border: 1px solid yellow;
+}

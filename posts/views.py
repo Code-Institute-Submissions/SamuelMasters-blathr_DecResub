@@ -1,17 +1,23 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 from .models import Post, Category
 from .forms import PostForm
-from django.contrib.auth.models import User
-
 
 
 def home(request):
+    """
+    View for the homepage of the site.
+    """
     post_list = Post.objects.all()
     category_list = Category.objects.all()
-    return render(request, 'index.html', {'post_list': post_list, 'category_list': category_list})
+    return render(request, 'index.html', {'post_list': post_list,
+                                          'category_list': category_list})
 
 
 def add_post(request, form=PostForm):
+    """
+    View for the post creation interface, and to add new posts to database.
+    """
 
     if request.POST:
         new_post = form(request.POST)
@@ -30,3 +36,15 @@ def add_post(request, form=PostForm):
             "post_form": PostForm(),
         },
     )
+
+def post_detail(request, id):
+    """
+    View for showing one post in it's entirety.
+    """
+    context = {}
+
+    context['data'] = Post.objects.get(post_id = id)
+
+    return render(request, 'post_detail.html', context)
+
+
