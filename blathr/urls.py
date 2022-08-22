@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from posts.views import home, add_post, post_detail
+from posts.views import home, add_post, post_detail, delete_post
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('add/add_post/', add_post, name='add_post'),
     path('post_detail/<post_id>/', post_detail, name='post_detail'),
+    path('post_detail/<post_id>/delete/', delete_post, name='delete_post'),
 ]

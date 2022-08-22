@@ -10,7 +10,7 @@
         {% if data.author == request.user %}
         <div id="post-buttons" class="d-flex justify-content-end">
             <button type="button" class="btn btn-warning">Edit</button>
-            <button type="button" class="btn btn-danger">Delete Post</button>
+            <button type="button" class="btn btn-danger"><a href="delete/">Delete Post</a></button>
         </div>
         {% endif %}
     </div>

@@ -46,3 +46,12 @@ def post_detail(request, post_id):
     context['data'] = Post.objects.get(post_id=post_id)
 
     return render(request, 'post_detail.html', context)
+
+
+def delete_post(request, post_id):
+    """
+    View for deleting a post from the database.
+    """
+    post = Post.objects.get(post_id=post_id)
+    post.delete()
+    return redirect(home)
