@@ -7,6 +7,12 @@
         <h3>{{ data.title }}</h3>
         <p>Posted by: <em>{{ data.author }}</em></p>
         <p>{{ data.content | safe }}</p>
+        {% if data.author == request.user %}
+        <div id="post-buttons" class="d-flex justify-content-end">
+            <button type="button" class="btn btn-warning">Edit</button>
+            <button type="button" class="btn btn-danger">Delete Post</button>
+        </div>
+        {% endif %}
     </div>
 </div>
 
