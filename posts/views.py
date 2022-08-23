@@ -79,16 +79,3 @@ def edit_post(request, post_id):
         return redirect(home)
 
     return HttpResponse(template.render(context, request))
-
-
-def update_post(request, post_id):
-    """
-    Updates records after edits are submitted.
-    """
-    title = request.POST['post_title']
-    content = request.POST['post_content']
-    post = Post.objects.get(post_id=post_id)
-    post.title = title
-    post.content = content
-    post.save()
-    return redirect(home)

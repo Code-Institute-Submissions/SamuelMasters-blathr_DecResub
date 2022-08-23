@@ -18,7 +18,7 @@
                     <h4>{{ post.title }}</h4>
                     <p>Posted by: <em>{{ post.author }}</em></p>
                     <p>{{ post.content | safe | slice:":300"}}</p>
-                    <p><strong><a href="#">View More...</a></strong></p>
+                    <p><strong><a href="post_detail/{{ post.post_id }}">View More...</a></strong></p>
                 </div>
             </div>
         </div>
