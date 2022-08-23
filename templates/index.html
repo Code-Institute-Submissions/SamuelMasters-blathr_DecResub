@@ -12,6 +12,7 @@
 
     <div class="col-md-9">
         {% for post in post_list %}
+        {% if post.status == 1 %}
         <div class="col-12 col-md-9">
             <div class="post-card">
                 <div class="post-card-body">
@@ -22,6 +23,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 </div>

@@ -75,6 +75,7 @@ def edit_post(request, post_id):
         post = Post.objects.get(post_id=post_id)
         post.title = title
         post.content = content
+        post.status = 0  # Reset status to require admin reapproval
         post.save()
         return redirect(home)
 
