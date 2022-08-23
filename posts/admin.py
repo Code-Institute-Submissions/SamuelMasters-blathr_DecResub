@@ -16,6 +16,13 @@ class PostAdmin(SummernoteModelAdmin):
     list_display = ('title', 'author', 'created_date', 'category', 'status')
     list_filter = ['author', 'created_date', 'category']
     search_fields = ('author', 'content')
+    actions = ['approve_posts', 'disapprove_posts']
+
+    def approve_posts(self, request, queryset):
+        queryset.update(status=1)
+
+    def disapprove_posts(self, request, queryset):
+        queryset.update(status=0)
 
 
 @admin.register(Comment)
