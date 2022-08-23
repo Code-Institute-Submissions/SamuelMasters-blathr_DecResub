@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="row" id="post-detail-row">
+    <div class="col-10 border border-secondary rounded" id="post-detail-col">
+
+        <h2>Edit Post</h2>
+        <form action="update/" method="post">
+            {% csrf_token %}
+            Title:
+            <input name="post_title" value="{{ post.title }}">
+            Content:
+            <input name="post_content" value="{{ post.content }}">
+            <input type="submit">
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

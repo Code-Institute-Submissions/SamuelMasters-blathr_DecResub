@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template import loader
 from .models import Post, Category
 from .forms import PostForm
 
@@ -54,4 +56,39 @@ def delete_post(request, post_id):
     """
     post = Post.objects.get(post_id=post_id)
     post.delete()
+    return redirect(home)
+
+
+def edit_post(request, post_id):
+    """
+    View for updating a post.
+    """
+    post = Post.objects.get(post_id=post_id)
+    template = loader.get_template('edit_post.html')
+    context = {
+        'post': post,
+    }
+
+    if request.POST:
+        title = request.POST['post_title']
+        content = request.POST['post_content']
+        post = Post.objects.get(post_id=post_id)
+        post.title = title
+        post.content = content
+        post.save()
+        return redirect(home)
+
+    return HttpResponse(template.render(context, request))
+
+
+def update_post(request, post_id):
+    """
+    Updates records after edits are submitted.
+    """
+    title = request.POST['post_title']
+    content = request.POST['post_content']
+    post = Post.objects.get(post_id=post_id)
+    post.title = title
+    post.content = content
+    post.save()
     return redirect(home)
