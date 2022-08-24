@@ -6,7 +6,7 @@
     <div class="col-md-3" id="category-col">
         <p><strong>Categories:</strong></p><br>
         {% for category in category_list %}
-        <p><a href="#"><strong>{{ category.name }}</strong></a></p>
+        <p><a href="{{ category.id }}"><strong>{{ category.name }}</strong></a></p>
         {% endfor %}
     </div>
 
@@ -17,7 +17,7 @@
             <div class="post-card">
                 <div class="post-card-body">
                     <h4>{{ post.title }}</h4>
-                    <p>Posted by: <em>{{ post.author }}</em></p>
+                    <p>Posted by: <em>"{{ post.author }}"</em> | <strong>{{ post.category }}</strong></p>
                     <p>{{ post.content | safe | slice:":300"}}</p>
                     <p><strong><a href="post_detail/{{ post.post_id }}">View More...</a></strong></p>
                 </div>

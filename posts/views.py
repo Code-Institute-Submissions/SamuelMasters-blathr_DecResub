@@ -10,8 +10,13 @@ def home(request):
     """
     View for the homepage of the site.
     """
-    post_list = Post.objects.all()
+
     category_list = Category.objects.all()
+    # if request.POST:
+    post_list = Post.objects.filter(category__name="Technology").order_by('-created_date')
+    # else:
+    #     post_list = Post.objects.all().order_by('-created_date')
+
     return render(request, 'index.html', {'post_list': post_list,
                                           'category_list': category_list})
 

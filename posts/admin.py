@@ -6,7 +6,7 @@ from .models import Category, Post, Comment
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
 
-    list_display = ('name',)
+    list_display = ('name', 'category_id')
 
 
 @admin.register(Post)
