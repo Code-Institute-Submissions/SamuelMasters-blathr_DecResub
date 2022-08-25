@@ -6,7 +6,7 @@
     <div class="col-md-3" id="category-col">
         <p><strong>Categories:</strong></p><br>
         {% for category in category_list %}
-        <p><a href="{{ category.id }}"><strong>{{ category.name }}</strong></a></p>
+        <p><a href="filtered/{{ category.category_id }}"><strong>{{ category.name }}</strong></a></p>
         {% endfor %}
     </div>
 

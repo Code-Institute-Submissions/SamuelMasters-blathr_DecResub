@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.template import loader
 from .models import Post, Category
 from .forms import PostForm
@@ -12,10 +12,19 @@ def home(request):
     """
 
     category_list = Category.objects.all()
-    # if request.POST:
-    post_list = Post.objects.filter(category__name="Technology").order_by('-created_date')
-    # else:
-    #     post_list = Post.objects.all().order_by('-created_date')
+    post_list = Post.objects.all().order_by('-created_date')
+
+    return render(request, 'index.html', {'post_list': post_list,
+                                          'category_list': category_list})
+
+
+def filtered_list(request, category_id):
+    """
+    Filtered view for the homepage of the site.
+    """
+
+    category_list = Category.objects.all()
+    post_list = Post.objects.filter(category_id=category_id).order_by('-created_date')
 
     return render(request, 'index.html', {'post_list': post_list,
                                           'category_list': category_list})
@@ -43,6 +52,7 @@ def add_post(request, form=PostForm):
             "post_form": PostForm(),
         },
     )
+
 
 def post_detail(request, post_id):
     """
