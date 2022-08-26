@@ -2,12 +2,14 @@
 
 {% block content %}
 
+{% load crispy_forms_tags %}
+
 <div class="row" id="post-detail-row">
     <div class="col-10 border border-secondary rounded" id="post-detail-col">
-        <h3>{{ data.title }}</h3>
-        <p>Posted by: <em>{{ data.author }}</em></p>
-        <p>{{ data.content | safe }}</p>
-        {% if data.author == request.user %}
+        <h3>{{ post.title }}</h3>
+        <p>Posted by: <em>{{ post.author }}</em></p>
+        <p>{{ post.content | safe }}</p>
+        {% if post.author == request.user %}
         <div id="post-buttons" class="d-flex justify-content-end">
 
             <button type="button" class="btn btn-warning"><a href="edit/">Edit</a></button>
@@ -28,20 +30,46 @@
                         </div>
                         <div class="modal-body">
                             <p>You are about to delete your post. Are you sure you wish to proceed?
-                                Deleted posts cannot be recovered. 
+                                Deleted posts cannot be recovered.
                             </p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-danger"><a href="delete/">Yes, delete my post</a></button>
+                            <button type="button" class="btn btn-danger"><a href="delete/">Yes, delete my
+                                    post</a></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         {% endif %}
+
+        <!-- {% if commented %}
+        <div class="alert alert-success" role="alert">
+            Your comment is currently awaiting approval.
+        </div>
+        {% else %} -->
+
+        {% if user.is_authenticated %}
+        <h5>Post a comment:</h5>
+        <p>Posting as: {{ user.username }}</p>
+        <form method="post">
+            {{ comment_form | crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn">Submit Comment</button>
+        </form>
+        {% endif %}
+
+        {% for comment in comments %}
+        <div class="card-body">
+            <h6>{{ comment.name }} | Posted at: {{ comment.created_on }}</h6>
+            <p>{{ comment.body}}</p>
+        </div>
+        {% endfor %}
+
+        <!-- {% endif %} -->
+
     </div>
-</div>
 
 
-{% endblock %}
+    {% endblock %}

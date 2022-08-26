@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.template import loader
 from .models import Post, Category
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 
 
 def home(request):
@@ -12,7 +12,7 @@ def home(request):
     """
 
     category_list = Category.objects.all()
-    post_list = Post.objects.all().order_by('-created_date')
+    post_list = Post.objects.filter(status=1).order_by('-created_date')
 
     return render(request, 'index.html', {'post_list': post_list,
                                           'category_list': category_list})
@@ -58,11 +58,34 @@ def post_detail(request, post_id):
     """
     View for showing one post in it's entirety.
     """
-    context = {}
 
-    context['data'] = Post.objects.get(post_id=post_id)
+    post = Post.objects.get(post_id=post_id)
+    comments = post.comments.filter(approved=True)
+    print("request.method is " + request.method)
 
-    return render(request, 'post_detail.html', context)
+    if request.POST:
+        comment_form = CommentForm(data=request.POST)
+        print("The request.method was recognised as POST.")  # debug
+
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.name = request.user.username
+            new_comment.post = post
+            new_comment.save()
+            print("The new_comment instance was saved.")  # debug
+        else:
+            comment_form = CommentForm()
+            print("The comment form was rendered blank.")  # debug
+
+    return render(
+        request,
+        'post_detail.html',
+        {
+            'post': post,
+            'comments': comments,
+            'comment_form': CommentForm(),
+         },
+          )
 
 
 def delete_post(request, post_id):

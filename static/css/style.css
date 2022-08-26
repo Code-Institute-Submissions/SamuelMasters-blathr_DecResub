@@ -79,3 +79,7 @@ footer {
 #post-buttons button {
     margin-left: 5px;
 }
+
+.card-body {
+    margin-top: 2%;
+}
