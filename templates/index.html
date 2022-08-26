@@ -8,6 +8,8 @@
         {% for category in category_list %}
         <p><a href="{% url 'filtered_list' category.category_id %}"><strong>{{ category.name }}</strong></a></p>
         {% endfor %}
+        <br>
+        <p><a href="{% url 'home' %}"><strong>Reset Filter</strong></a></p>
     </div>
 
     <div class="col-md-9">
@@ -26,6 +28,23 @@
         {% endif %}
         {% endfor %}
     </div>
+
+    <!-- standard Django pagination -->
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" 
+                class="page-link">&laquo; PREV </a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" 
+                class="page-link"> NEXT &raquo;</a></li>
+
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
 </div>
 
 {% endblock %}

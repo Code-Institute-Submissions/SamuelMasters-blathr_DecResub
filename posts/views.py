@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.template import loader
 from .models import Post, Category
@@ -13,9 +14,13 @@ def home(request):
 
     category_list = Category.objects.all()
     post_list = Post.objects.filter(status=1).order_by('-created_date')
+    paginator = Paginator(post_list, 6)  # Show 6 posts per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     return render(request, 'index.html', {'post_list': post_list,
-                                          'category_list': category_list})
+                                          'category_list': category_list,
+                                          'page_obj': page_obj, })
 
 
 def filtered_list(request, category_id):
