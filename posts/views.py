@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+from django.urls import reverse
 from .models import Post, Category
 from .forms import PostForm, CommentForm
 
@@ -65,7 +66,7 @@ def add_post(request, form=PostForm):
 
 def post_detail(request, post_id):
     """
-    View for showing one post in it's entirety.
+    View for showing one post in it's entirety and for submitting new comments.
     """
 
     post = Post.objects.get(post_id=post_id)
@@ -83,6 +84,7 @@ def post_detail(request, post_id):
             messages.add_message(request, messages.SUCCESS, 'Your comment was submitted and is awaiting approval.')
             new_comment.save()
             print("The new_comment instance was saved.")  # debug
+            return redirect(request.path_info)  # redirects to current page as GET
         else:
             comment_form = CommentForm()
             print("The comment form was rendered blank.")  # debug
