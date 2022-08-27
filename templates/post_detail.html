@@ -44,19 +44,13 @@
         </div>
         {% endif %}
 
-        <!-- {% if commented %}
-        <div class="alert alert-success" role="alert">
-            Your comment is currently awaiting approval.
-        </div>
-        {% else %} -->
-
         {% if user.is_authenticated %}
         <h5>Post a comment:</h5>
         <p>Posting as: {{ user.username }}</p>
         <form method="post">
             {{ comment_form | crispy }}
             {% csrf_token %}
-            <button type="submit" class="btn">Submit Comment</button>
+            <button type="submit" class="btn btn-success">Submit Comment</button>
         </form>
         {% endif %}
 
@@ -67,9 +61,6 @@
         </div>
         {% endfor %}
 
-        <!-- {% endif %} -->
-
     </div>
-
 
     {% endblock %}

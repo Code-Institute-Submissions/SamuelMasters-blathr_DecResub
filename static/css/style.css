@@ -85,6 +85,11 @@ footer {
     margin-top: 2%;
 }
 
+.btn {
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
 .btn-warning a {
     text-decoration: none;
     color: black;
