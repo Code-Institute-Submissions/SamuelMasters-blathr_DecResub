@@ -33,8 +33,6 @@ class Post(models.Model):
     content = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     status = models.IntegerField(choices=STATUS, default=0)
-    vote_count = models.ManyToManyField(User, related_name='vote_count',
-                                        blank=True)
 
     def __str__(self):
         return self.title
