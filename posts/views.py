@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.http import HttpResponse
@@ -48,7 +49,10 @@ def add_post(request, form=PostForm):
             post_user = User.objects.get(username=request.user.username)
             post_to_add.author = post_user  # adds the current user as author
             post_to_add.save()
+            messages.add_message(request, messages.SUCCESS, 'Your post was submitted and is awaiting approval.')
             return redirect(home)  # redirects to home page after submission
+        else:
+            messages.add_message(request, messages.ERROR, 'There was a problem, please try submitting your post again.')
 
     return render(
         request,
@@ -76,6 +80,7 @@ def post_detail(request, post_id):
             new_comment = comment_form.save(commit=False)
             new_comment.name = request.user.username
             new_comment.post = post
+            messages.add_message(request, messages.SUCCESS, 'Your comment was submitted and is awaiting approval.')
             new_comment.save()
             print("The new_comment instance was saved.")  # debug
         else:

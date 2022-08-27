@@ -84,3 +84,8 @@ footer {
 .card-body {
     margin-top: 2%;
 }
+
+.btn-warning a {
+    text-decoration: none;
+    color: black;
+}
