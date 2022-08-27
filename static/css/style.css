@@ -89,3 +89,43 @@ footer {
     text-decoration: none;
     color: black;
 }
+
+#category-list-container {
+    list-style-type: none;
+    padding: 0;
+}
+
+#category-list-container li {
+    margin-top: 1%;
+}
+
+#category-list-container li a {
+    text-decoration: none;
+}
+
+/* Media queries for category list iteration */
+@media screen and (min-width:367px){
+
+	.narrow-results {
+        display: block;
+    }    
+    
+}
+
+@media screen and (max-width:367px){
+	
+    .narrow-results {
+        display: none;
+    }
+
+}
+
+@media screen and (min-width:768px){
+
+    .narrow-results {
+        height: 100%;
+    }
+
+    
+
+}

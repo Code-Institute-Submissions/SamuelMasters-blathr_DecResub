@@ -3,24 +3,48 @@
 {% block content %}
 
 <div class="row" id="body-row">
-    <div class="col-md-3" id="category-col">
-        <p><strong>Categories:</strong></p><br>
-        {% for category in category_list %}
-        <p><a href="{% url 'filtered_list' category.category_id %}"><strong>{{ category.name }}</strong></a></p>
-        {% endfor %}
-        <br>
-        <p><a href="{% url 'home' %}"><strong>Reset Filter</strong></a></p>
+
+
+    <div class="col-sm-12 col-md-2" id="category-col">
+        <button type="button" class="btn visible-xs" data-bs-toggle="collapse" data-bs-target="#narrow-results">View
+            Categories</button>
+        <div id="narrow-results" class="narrow-results collapse">
+            <p><strong>Categories:</strong></p>
+            <ul id="category-list-container">
+                {% for category in category_list %}
+                <li><a href="{% url 'filtered_list' category.category_id %}"><strong>{{ category.name }}</strong></a>
+                </li>
+                {% endfor %}
+                <hr>
+                <div id="reset-filter">
+                    <li><a href="{% url 'home' %}"><strong>Reset Filter</strong></a></li>
+                </div>
+            </ul>
+        </div>
     </div>
 
-    <div class="col-md-9">
+    <!-- <div class="col-sm-12 col-md-2" id="category-col">
+        <p><strong>Categories:</strong></p>
+        <ul id="category-list-container">
+            {% for category in category_list %}
+            <li><a href="{% url 'filtered_list' category.category_id %}"><strong>{{ category.name }}</strong></a></li>
+            {% endfor %}
+            <hr>
+            <div id="reset-filter">
+                <li><a href="{% url 'home' %}"><strong>Reset Filter</strong></a></li>
+            </div>
+        </ul>
+    </div> -->
+
+    <div class="col-md-10">
         {% for post in post_list %}
         {% if post.status == 1 %}
-        <div class="col-12 col-md-9">
+        <div class="col-12">
             <div class="post-card">
                 <div class="post-card-body">
                     <h4>{{ post.title }}</h4>
                     <p>Posted by: <em>"{{ post.author }}"</em> | <strong>{{ post.category }}</strong></p>
-                    <p>{{ post.content | safe | slice:":300"}}</p>
+                    <p>{{ post.content | safe | slice:":600"}}</p>
                     <p><strong><a href="{% url 'post_detail' post.post_id %}">View More...</a></strong></p>
                 </div>
             </div>
@@ -29,7 +53,7 @@
         {% endfor %}
     </div>
 
-    <!-- standard Django pagination -->
+    <!-- standard Django pagination
     {% if is_paginated %}
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
@@ -44,7 +68,7 @@
             {% endif %}
         </ul>
     </nav>
-    {% endif %}
+    {% endif %} -->
 </div>
 
 {% endblock %}
