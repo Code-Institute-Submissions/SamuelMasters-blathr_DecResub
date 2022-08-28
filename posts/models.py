@@ -1,3 +1,6 @@
+"""
+Contains schemas and models for data used within the posts app.
+"""
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -10,6 +13,9 @@ class Category(models.Model):
     name = models.CharField(max_length=20, unique=True, null=False)
 
     def __str__(self):
+        """
+        Allows for verbose naming within Django admin panel.
+        """
         return self.name
 
     class Meta:
@@ -34,6 +40,9 @@ class Post(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
 
     def __str__(self):
+        """
+        Allows for verbose naming within Django admin panel.
+        """
         return self.title
 
 
