@@ -15,9 +15,7 @@
                 <li><a href="{% url 'filtered_list' category.category_id %}"><strong>{{ category.name }}</strong></a>
                 </li>
                 {% endfor %}
-                <span id="reset-filter">
-                    <li><a href="{% url 'home' %}"><strong>Reset Filter</strong></a></li>
-                </span>
+                    <li><a href="{% url 'home' %}"><em>Reset Filter</em></a></li>
             </ul>
         </div>
     </div>

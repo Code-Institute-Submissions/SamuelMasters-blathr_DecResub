@@ -5,7 +5,7 @@ from .models import Post, Comment
 
 class PostForm(forms.ModelForm):
     title = forms.CharField(max_length=100)
-    content = forms.CharField(widget=SummernoteWidget())
+    content = forms.TextInput()
 
     class Meta:
         model = Post
