@@ -85,14 +85,8 @@
         </footer>
     </div>
 
-    <!-- Auto-dismisses Django messages --> <!-- MOVE TO STATIC -->
-    <script>
-        setTimeout(function () {
-            let messages = document.getElementById("msg");
-            let alert = new bootstrap.Alert(messages);
-            alert.close();
-        }, 3000);
-    </script>
+    <!-- Auto-dismisses Django messages -->
+    <script src="{% static 'js/script.js' %}"></script>
 
 </body>
 
