@@ -5,9 +5,9 @@
 <div class="row" id="body-row">
 
 
-    <div class="col-sm-12 col-md-2" id="category-col">
-        <button type="button" class="btn visible-xs" data-bs-toggle="collapse" data-bs-target="#narrow-results">View
-            Categories</button>
+    <div class="col-sm-12 col-md-2">
+        <button type="button" class="btn" data-bs-toggle="collapse" data-bs-target="#narrow-results">Toggle
+            Filters</button>
         <div id="narrow-results" class="narrow-results collapse">
             <p><strong>Categories:</strong></p>
             <ul id="category-list-container">
@@ -23,24 +23,11 @@
         </div>
     </div>
 
-    <!-- <div class="col-sm-12 col-md-2" id="category-col">
-        <p><strong>Categories:</strong></p>
-        <ul id="category-list-container">
-            {% for category in category_list %}
-            <li><a href="{% url 'filtered_list' category.category_id %}"><strong>{{ category.name }}</strong></a></li>
-            {% endfor %}
-            <hr>
-            <div id="reset-filter">
-                <li><a href="{% url 'home' %}"><strong>Reset Filter</strong></a></li>
-            </div>
-        </ul>
-    </div> -->
-
     <div class="col-md-10">
         {% for post in post_list %}
         {% if post.status == 1 %}
         <div class="col-12">
-            <div class="post-card">
+            <div class="post-card border border-dark border-3 rounded-3">
                 <div class="post-card-body">
                     <h4>{{ post.title }}</h4>
                     <p>Posted by: <em>"{{ post.author }}"</em> | <strong>{{ post.category }}</strong></p>

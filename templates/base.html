@@ -17,13 +17,16 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+    </style>
     <title>Blathr</title>
 </head>
 
 <body>
 
     <header class="sticky-top">
-        <div class="container-fluid">
+        <div class="container-fluid border-bottom border-3" id="header-container">
             <nav class="navbar">
                 <!-- add a Bootstrap bg here -->
                 <h1 class="navbar-brand" id="navbar-logo"><a href="{% url 'home' %}">Blathr</a></h1>
@@ -64,7 +67,7 @@
 
     <footer class="footer">
         <!-- add fixed-bottom class at later date -->
-        <div class="row">
+        <div class="row border-top border-3" id="footer-container">
             <div class="col-12">
                 <p class="text-center">
                     <em>For Educational Purposes Only</em>
@@ -81,7 +84,7 @@
 
     <!-- Auto-dismisses Django messages -->
     <script>
-        setTimeout(function() {
+        setTimeout(function () {
             let messages = document.getElementById("msg");
             let alert = new bootstrap.Alert(messages);
             alert.close();

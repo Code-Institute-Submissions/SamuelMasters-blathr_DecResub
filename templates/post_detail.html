@@ -5,7 +5,7 @@
 {% load crispy_forms_tags %}
 
 <div class="row" id="post-detail-row">
-    <div class="col-10 border border-secondary rounded" id="post-detail-col">
+    <div class="col-10 border border-dark border-3 rounded-3" id="post-detail-col">
         <h3>{{ post.title }}</h3>
         <p>Posted by: <em>{{ post.author }}</em></p>
         <p>{{ post.content | safe }}</p>
