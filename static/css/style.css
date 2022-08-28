@@ -90,11 +90,7 @@ h2, h3, h4, h5, h6, #navbar-logo {
 .btn {
     margin-top: 1%;
     margin-bottom: 1%;
-}
-
-.btn-warning a {
     text-decoration: none;
-    color: black;
 }
 
 .form-control {
@@ -114,6 +110,10 @@ h2, h3, h4, h5, h6, #navbar-logo {
     margin: 0;
     padding: 0;
     justify-content: left;
+}
+
+#post-buttons btn {
+    text-decoration: none;
 }
 
 /* 
