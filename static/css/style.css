@@ -180,6 +180,10 @@ Used to fix the footer to the bottom of the page
     color: #379683;
 }
 
+#reset-filter {
+    margin-top: 20px;
+}
+
 #footer-container, .post-card, #header-container, #post-detail-col {
     border-color: #454645!important;
 }

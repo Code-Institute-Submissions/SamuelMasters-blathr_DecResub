@@ -15,10 +15,9 @@
                 <li><a href="{% url 'filtered_list' category.category_id %}"><strong>{{ category.name }}</strong></a>
                 </li>
                 {% endfor %}
-                <hr>
-                <div id="reset-filter">
+                <span id="reset-filter">
                     <li><a href="{% url 'home' %}"><strong>Reset Filter</strong></a></li>
-                </div>
+                </span>
             </ul>
         </div>
     </div>
@@ -31,7 +30,7 @@
                 <div class="post-card-body">
                     <h4>{{ post.title }}</h4>
                     <p>Posted by: <em>"{{ post.author }}"</em> | <strong>{{ post.category }}</strong></p>
-                    <p>{{ post.content | safe | slice:":600"}}</p>
+                    {{ post.content | safe | slice:":600"}}
                     <p><strong><a href="{% url 'post_detail' post.post_id %}">View More...</a></strong></p>
                 </div>
             </div>
