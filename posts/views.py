@@ -2,9 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.template import loader
-from django.urls import reverse
 from .models import Post, Category
 from .forms import PostForm, CommentForm
 
@@ -31,7 +30,8 @@ def filtered_list(request, category_id):
     """
 
     category_list = Category.objects.all()
-    post_list = Post.objects.filter(category_id=category_id).order_by('-created_date')
+    post_list = Post.objects.filter(category_id=category_id
+                                    ).order_by('-created_date')
 
     return render(request, 'index.html', {'post_list': post_list,
                                           'category_list': category_list})
@@ -50,10 +50,12 @@ def add_post(request, form=PostForm):
             post_user = User.objects.get(username=request.user.username)
             post_to_add.author = post_user  # adds the current user as author
             post_to_add.save()
-            messages.add_message(request, messages.SUCCESS, 'Your post was submitted and is awaiting approval.')
+            messages.add_message(request, messages.SUCCESS, 'Your post was '
+                                 'submitted and is awaiting approval.')
             return redirect(home)  # redirects to home page after submission
         else:
-            messages.add_message(request, messages.ERROR, 'There was a problem, please try submitting your post again.')
+            messages.add_message(request, messages.ERROR, 'There was a problem'
+                                 ', please try submitting your post again.')
 
     return render(
         request,
@@ -75,19 +77,18 @@ def post_detail(request, post_id):
 
     if request.POST:
         comment_form = CommentForm(data=request.POST)
-        print("The request.method was recognised as POST.")  # debug
 
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
             new_comment.name = request.user.username
             new_comment.post = post
-            messages.add_message(request, messages.SUCCESS, 'Your comment was submitted and is awaiting approval.')
+            messages.add_message(request, messages.SUCCESS, 'Your comment was '
+                                 'submitted and is awaiting approval.')
             new_comment.save()
-            print("The new_comment instance was saved.")  # debug
-            return redirect(request.path_info)  # redirects to current page as GET
+            # redirects to current page as GET
+            return redirect(request.path_info)
         else:
             comment_form = CommentForm()
-            print("The comment form was rendered blank.")  # debug
 
     return render(
         request,

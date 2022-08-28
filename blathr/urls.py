@@ -16,7 +16,14 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from posts.views import home, add_post, post_detail, delete_post, edit_post, filtered_list
+from posts.views import (
+    home,
+    add_post,
+    post_detail,
+    delete_post,
+    edit_post,
+    filtered_list,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
