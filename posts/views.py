@@ -3,9 +3,11 @@ Contains function-based views for rendering project templates.
 """
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.http import HttpResponse
+
 from django.template import loader
 from .models import Post, Category
 from .forms import PostForm, CommentForm
@@ -40,6 +42,7 @@ def filtered_list(request, category_id):
                                           'category_list': category_list})
 
 
+@login_required
 def add_post(request, form=PostForm):
     """
     View for the post creation interface, and to add new posts to database.
@@ -76,7 +79,6 @@ def post_detail(request, post_id):
 
     post = Post.objects.get(post_id=post_id)
     comments = post.comments.filter(approved=True)
-    print("request.method is " + request.method)
 
     if request.POST:
         comment_form = CommentForm(data=request.POST)
@@ -104,15 +106,26 @@ def post_detail(request, post_id):
           )
 
 
+@login_required
 def delete_post(request, post_id):
     """
     View for deleting a post from the database.
     """
+
     post = Post.objects.get(post_id=post_id)
-    post.delete()
-    return redirect(home)
+    if post.author == request.user:
+        post = Post.objects.get(post_id=post_id)
+        post.delete()
+        messages.add_message(request, messages.SUCCESS, "Your post has been "
+                             "deleted.")
+        return redirect(home)
+    else:
+        messages.add_message(request, messages.ERROR, "You are not this post's"
+                             " author. Only the post's author may delete it. ")
+        return redirect(home)
 
 
+@login_required
 def edit_post(request, post_id):
     """
     View for updating a post.
@@ -123,14 +136,24 @@ def edit_post(request, post_id):
         'post': post,
     }
 
-    if request.POST:
-        title = request.POST['post_title']
-        content = request.POST['post_content']
-        post = Post.objects.get(post_id=post_id)
-        post.title = title
-        post.content = content
-        post.status = 0  # Reset status to require admin reapproval
-        post.save()
-        return redirect(home)
+    if post.author == request.user:
+        if request.POST:
+            title = request.POST['post_title']
+            content = request.POST['post_content']
+            post = Post.objects.get(post_id=post_id)
+            post.title = title
+            post.content = content
+            post.status = 0  # Reset status to require admin reapproval
+            post.save()
+            messages.add_message(request, messages.SUCCESS, "Your changes have"
+                                 " been saved. Please note that your post "
+                                 "will need to be reapproved by an admin "
+                                 " before it is visible again.")
+            return redirect(home)
 
-    return HttpResponse(template.render(context, request))
+        return HttpResponse(template.render(context, request))
+    else:
+        messages.add_message(request, messages.ERROR, "You are not this post's"
+                             " author. Only the post's author may make "
+                             "changes to it's content.")
+        return redirect(home)

@@ -1,4 +1,4 @@
-# Workout Planner
+# Blathr
 
 
 **Developer: Samuel Masters**
